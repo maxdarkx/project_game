@@ -18,6 +18,7 @@ entity juego is
            rst:       in  std_logic;
            moneda:    in std_logic;
            mult:      in std_logic;
+           start:     in std_logic;
            led :      out STD_LOGIC_VECTOR (7 downto 0);
            led_st:    out STD_LOGIC_VECTOR (7 downto 0);
            --hcount:    out  STD_LOGIC_VECTOR (10 downto 0);  --para simular
@@ -29,7 +30,7 @@ entity juego is
 end juego;
 
 
-architecture Behavioral of machine is
+architecture Behavioral of juego is
 
 
 component display_34
@@ -61,9 +62,6 @@ component states_machine
 Port 
 (
   clk:      in  STD_LOGIC;
-  clk_1:    in  STD_LOGIC;
-  keycode:  in  std_logic_vector(7 downto 0);
-  flag_x:   in  std_logic;
   rst:      in  std_logic;
   hcount:   in  std_logic_vector(10 downto 0);
   vcount:   in  std_logic_vector(10 downto 0);
@@ -75,7 +73,7 @@ Port
 end component;
 
 
-signal Tled :         std_logic_vector(7 downto 0):= "00000000";
+signal Tled :         std_logic_vector(7 downto 0):= "00000001";
 --signal Iv: std_logic := '0';
 signal clk50Mhz :     std_logic:='0';
 signal rgb_aux:       std_logic_vector(11 downto 0);
@@ -104,13 +102,12 @@ begin
     --debe ser 10000000
   if cnt >=50000000 then
   --if cnt >=12500000 then--solo para simular
-      temp<=not temp;
+      clk100hz<=not clk100hz;
       cnt<=0;
     else
       cnt<=cnt+1;
     end if;
   end if;
-  clk100hz<=temp;
 end process;
 
 rst_real:process (rst)
@@ -142,9 +139,6 @@ states_machine1: states_machine
 Port map
 (
   clk       => clk,
-  clk_1     => clk100hz,
-  keycode   => Tled,
-  flag_x    => flag_x,
   rst       => rst,
   hcount    => hcount1,
   vcount    => vcount1,
@@ -173,6 +167,7 @@ begin
     rgb_aux<="111111111111";
   end if;
 end process;       
+led<="11111110";
 --gueva
 --hcount<=hcount1; 
 --vcount<=vcount1;

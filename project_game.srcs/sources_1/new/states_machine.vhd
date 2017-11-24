@@ -48,7 +48,6 @@ Port
 end states_machine;
 
 architecture Behavioral of states_machine is
-	--constant value: std_logic:='0'; --borrar
 	constant dl:  integer := 50; 	--largo del caracter
 	constant dh:  integer := 100; 	--altura del caracter
 	constant lw:  integer := 5; 	--ancho de las lineas
@@ -99,6 +98,8 @@ begin
 		px101:= px1 + 3*(dl + esh);
 
 
+		data11<="01000110";
+		led<= "11111111";
 		if (vcount > py1) and (vcount <py2) then
 			posy<=py1;
 
@@ -110,7 +111,7 @@ begin
 				posx<=px11;
 				value<=data12;
 
-			elsif hcount>px12 and hcount<px1101 then
+			elsif hcount>px12 and hcount<px101 then
 				posx<=px12;
 				value<=data13;
 			--elsif hcount>px13 and hcount<px101 then
@@ -120,6 +121,8 @@ begin
 			--	posx<=px14;
 			--	value<=data_icon1;
 			end if;
+
+
 
 		--elsif vcount > py2 and vcount <py3 then
 		--	posy<=py2;
@@ -140,7 +143,6 @@ begin
 		--	--	posx<=px14;
 		--	--	value<=data_icon2;
 			end if;
-		end if;
 	end process;
 
 		
