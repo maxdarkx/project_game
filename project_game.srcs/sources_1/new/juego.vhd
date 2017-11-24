@@ -173,7 +173,7 @@ begin
     rgb_aux<="111111111111";
   end if;
 end process;       
-
+--gueva
 --hcount<=hcount1; 
 --vcount<=vcount1;
 
