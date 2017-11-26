@@ -2,10 +2,10 @@
 2017.3
 Oct  4 2017
 20:11:37
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sim_1/new/juego_sim.vhd,1511648992,vhdl,,,,juego_sim,,,,,,,,
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/debounce.vhd,1511647432,vhdl,,,,debounce,,,,,,,,
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/display_34.vhd,1511643433,vhdl,,,,display_34,,,,,,,,
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/juego.vhd,1511648904,vhdl,,,,juego,,,,,,,,
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/segment_decoder_34.vhd,1511640607,vhdl,,,,segment_decoder_34,,,,,,,,
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/states_machine.vhd,1511641116,vhdl,,,,states_machine,,,,,,,,
-C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/vga_ctrl_640x480_60Hz.vhd,1511274558,vhdl,,,,vga_ctrl_640x480_60hz,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sim_1/new/juego_sim.vhd,1511713341,vhdl,,,,juego_sim,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/debounce.vhd,1511710999,vhdl,,,,debounce,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/display_34.vhd,1511710999,vhdl,,,,display_34,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/juego.vhd,1511713074,vhdl,,,,juego,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/segment_decoder_34.vhd,1511710999,vhdl,,,,segment_decoder_34,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/states_machine.vhd,1511713525,vhdl,,,,states_machine,,,,,,,,
+C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/vga_ctrl_640x480_60Hz.vhd,1511710999,vhdl,,,,vga_ctrl_640x480_60hz,,,,,,,,

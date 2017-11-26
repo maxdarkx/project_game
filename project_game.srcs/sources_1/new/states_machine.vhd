@@ -65,18 +65,11 @@ architecture Behavioral of states_machine is
 
 	constant EVU : integer := 2*(dh+esh); -- espacio vertical utilizado
 	constant EHU1: integer := cc1*(dl+esh) ; --Espacio horizontal total utilizado fila 1 y 2
-	
 	constant RESET_DATA: std_logic_vector(7 downto 0):=(others=>'0');
-	constant code_F0: std_logic_vector(7 downto 0):="11110000"; --"F0"
-	constant code_E0: std_logic_vector(7 downto 0):="11100000";	--"E0"
-	constant code_R:  std_logic_vector(7 downto 0):="00101101";	--"R= 2D"
-	constant code_Enter: std_logic_vector(7 downto 0):="01011010";--"5A"
 
 	signal data11,data12,data13,data14 :std_logic_vector(7 downto 0):=RESET_DATA;
-	signal data21,data22,data23,data24 :std_logic_vector(7 downto 0):=RESET_DATA;
-	signal user_check: std_logic:='0';
 	type state_code is (s0,s1,s2,s3,s4,s5,s6,s7,s8,s9);
-	signal state_p_1,state_p_2,state_p_3,state_f_2,state_f_2,state_f_3: state_code:= s0;
+	signal state_p_1,state_p_2,state_p_3,state_f_1,state_f_2,state_f_3: state_code:= s0;
 	signal clk_1hz,clk_2hz,clk_4hz: std_logic:='0';
 	constant c_max:integer:=5000000;
 begin
@@ -87,8 +80,7 @@ begin
 		variable py1,py2,py3: integer;
 	begin
 
-		data11<="01000110";
-		led<= "11111111";
+	
 
 
 
@@ -177,7 +169,7 @@ begin
 	if (clk'event and clk = '1') then
 		counter:=counter+1;
 	end if;
-	if(counter=100000000) then
+	if(counter=50000000) then
 		counter:=0;
 		clk_2hz<=not clk_2hz;
 	end if;
@@ -189,7 +181,7 @@ begin
 	if (clk'event and clk = '1') then
 		counter:=counter+1;
 	end if;
-	if(counter=100000000) then
+	if(counter=25000000) then
 		counter:=0;
 		clk_4hz<=not clk_4hz;
 	end if;
@@ -213,9 +205,9 @@ variable move:std_logic:='0';
 begin
 
 if rst='1' then
-	state_f_2<=s0;
-	state_f_2<=s0;
-	state_f_3<=s0;
+	state_p_1<=s0;
+	state_p_2<=s0;
+	state_p_3<=s0;
 end if;
 
 if start='1' then
@@ -229,7 +221,7 @@ end if;
 --maquina 1
 if(clk_1hz'event and clk_1hz='1') then
 	if move = '1' then
-		state_p_1<=state_f_2;
+		state_p_1<=state_f_1;
 	end if;
 end if;
 if(clk_2hz'event and clk_2hz='1') then
@@ -255,34 +247,34 @@ begin
 	case state_p_1 is
 		when s0=>
 			data11<="01000101";
-			state_f_2<=s1;
+			state_f_1<=s1;
 		when s1=>
 			data11<="00010110";
-			state_f_2<=s2;
+			state_f_1<=s2;
 		when s2=>
 			data11<="00011110";
-			state_f_2<=s3;
+			state_f_1<=s3;
 		when s3=>
 			data11<="00100110";
-			state_f_2<=s4;
+			state_f_1<=s4;
 		when s4=>
 			data11<="00100101";
-			state_f_2<=s5;
+			state_f_1<=s5;
 		when s5=>
 			data11<="00101110";
-			state_f_2<=s6;
+			state_f_1<=s6;
 		when s6=>
 			data11<="00110110";
-			state_f_2<=s7;
+			state_f_1<=s7;
 		when s7=>
 			data11<="00111101";
-			state_f_2<=s8;
+			state_f_1<=s8;
 		when s8=>
 			data11<="00111110";
-			state_f_2<=s9;
+			state_f_1<=s9;
 		when s9=>
 			data11<="01000110";
-			state_f_2<=s0;
+			state_f_1<=s0;
 	end case;
 
 end process;

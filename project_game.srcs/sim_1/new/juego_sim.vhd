@@ -60,7 +60,7 @@ end component;
 
 	--____________________________________________________
 	--¿Cuantos frames lo voy a poner a grabar para matlab?
-	constant frame_max: integer :=60;
+	constant frame_max: integer :=610;
 	--____________________________________________________
 
 
@@ -117,27 +117,19 @@ input_data: process(frame_count)
 begin
 	
 		case frame_count is
-		
-		when 2=>
-			rst<='1';
-
 			
 		when 10=>
-			rst<='0';
+			
 			start<='1';
-			coin<='1';
+		when 15 =>
+			start<='0';
 
-		when 15=>
-			rst<='1';
-			coin<='1';
-			coin<='0';
-			mult<='1';
-			
-		when 18=>
-			rst<='0';
-			mult<='0';
-			
-		
+		when 600 =>
+			start<='1';
+	
+		when 601 =>
+			start<='0';
+
 		when others=>
 		end case;
 end process;
@@ -150,7 +142,8 @@ capa1r: process(hcount)
     variable temp1: std_logic_vector (3 downto 0);
     file solucion: text;
     variable c: std_logic:='0';
-    variable frame_aux: integer;
+    variable frame_count_aux: integer;
+    variable frame_aux: integer:=40;
 begin
 	
 
@@ -167,32 +160,36 @@ begin
 		--write(texto1,string'(""));
 	end if;
 
-	write (texto1, conv_integer(temp1));
+	if frame_count mod 15 = 0 then
+		
+		write (texto1, conv_integer(temp1));
 
-	if(hcount<=hmax)then
-		write (texto1, string'(","));
-	else
-		if (vcount<=vmax) then
-			if (vcount=vmax) then
-				write (texto1, string'("];"));
-				writeline (solucion, texto1);
+		if(hcount<=hmax)then
+			write (texto1, string'(","));
+		else
+			if (vcount<=vmax) then
+				if (vcount=vmax) then
+					write (texto1, string'("];"));
+					writeline (solucion, texto1);
+					frame_count_aux:=frame_count_aux+1;
 
-				if frame_count>frame_max then
-					file_close(solucion);
+					if frame_count_aux>frame_aux then
+						file_close(solucion);
+					else
+						write(texto1,string'("r(:,:,"));
+						write(texto1,frame_count_aux);
+						write(texto1,string'(")=["));
+
+					end if;
 				else
-					write(texto1,string'("r(:,:,"));
-					write(texto1,frame_count);
-					write(texto1,string'(")=["));
-
+					write (texto1, string'(";"));
+					--write(texto1, string'("   %("));
+					--write(texto1, conv_integer(hcount));
+					--write(texto1, string'(","));
+					--write(texto1, conv_integer(vcount));
+					--write(texto1, string'(")"));
+					--writeline (solucion, texto1);
 				end if;
-			else
-				write (texto1, string'(";"));
-				--write(texto1, string'("   %("));
-				--write(texto1, conv_integer(hcount));
-				--write(texto1, string'(","));
-				--write(texto1, conv_integer(vcount));
-				--write(texto1, string'(")"));
-				--writeline (solucion, texto1);
 			end if;
 		end if;
 	end if;

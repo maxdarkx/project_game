@@ -1,4 +1,2 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/juego.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity juego
-INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sim_1/new/juego_sim.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity juego_sim
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/Juan Carlos/Documents/vivado/project_game/project_game.srcs/sources_1/new/states_machine.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity states_machine
