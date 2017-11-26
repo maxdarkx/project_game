@@ -28,11 +28,8 @@ set_property target_language VHDL [current_project]
 set_property ip_output_repo {c:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.cache/ip} [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_vhdl -library xil_defaultlib {
-  {C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/display_34.vhd}
   {C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/segment_decoder_34.vhd}
-  {C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/states_machine.vhd}
-  {C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/vga_ctrl_640x480_60Hz.vhd}
-  {C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/juego.vhd}
+  {C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.srcs/sources_1/new/display_34.vhd}
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -42,14 +39,11 @@ read_vhdl -library xil_defaultlib {
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc {{C:/Users/Juan Carlos/Documents/Vivado/project_game/Basys3_Master.xdc}}
-set_property used_in_implementation false [get_files {{C:/Users/Juan Carlos/Documents/Vivado/project_game/Basys3_Master.xdc}}]
 
-
-synth_design -top juego -part xc7a35tcpg236-1
+synth_design -top display_34 -part xc7a35tcpg236-1
 
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef juego.dcp
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file juego_utilization_synth.rpt -pb display_34_utilization_synth.pb"
+write_checkpoint -force -noxdef display_34.dcp
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file display_34_utilization_synth.rpt -pb display_34_utilization_synth.pb"
