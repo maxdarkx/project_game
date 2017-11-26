@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2017.3 (64-bit)
+# SW Build 2018833 on Wed Oct  4 19:58:22 MDT 2017
+# IP Build 2016188 on Wed Oct  4 21:52:56 MDT 2017
+# Start of session at: Fri Nov 24 16:59:50 2017
+# Process ID: 1784
+# Current directory: C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.runs/impl_1
+# Command line: vivado.exe -log display_34.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source display_34.tcl -notrace
+# Log file: C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.runs/impl_1/display_34.vdi
+# Journal file: C:/Users/Juan Carlos/Documents/Vivado/project_game/project_game.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source display_34.tcl -notrace

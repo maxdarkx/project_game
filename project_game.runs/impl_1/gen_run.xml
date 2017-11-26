@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1511563255">
+  <File Type="PWROPT-DCP" Name="juego_pwropt.dcp"/>
+  <File Type="ROUTE-PWR" Name="juego_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="juego.tcl"/>
+  <File Type="ROUTE-PWR-SUM" Name="juego_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="juego_reports.tcl"/>
+  <File Type="BG-DRC" Name="juego.drc"/>
+  <File Type="OPT-DCP" Name="juego_opt.dcp"/>
+  <File Type="OPT-HWDEF" Name="juego.hwdef"/>
+  <File Type="OPT-DRC" Name="juego_drc_opted.rpt"/>
+  <File Type="PLACE-DCP" Name="juego_placed.dcp"/>
+  <File Type="PLACE-IO" Name="juego_io_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="juego_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="juego_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="juego_control_sets_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="juego_incremental_reuse_pre_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="juego_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="juego_physopt.dcp"/>
+  <File Type="BG-BIT" Name="juego.bit"/>
+  <File Type="ROUTE-ERROR-DCP" Name="juego_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="juego_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="juego_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="juego_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="juego_drc_routed.pb"/>
+  <File Type="BITSTR-MSK" Name="juego.msk"/>
+  <File Type="ROUTE-DRC-RPX" Name="juego_drc_routed.rpx"/>
+  <File Type="BG-BGN" Name="juego.bgn"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="juego_methodology_drc_routed.rpt"/>
+  <File Type="BITSTR-RBT" Name="juego.rbt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="juego_methodology_drc_routed.rpx"/>
+  <File Type="BG-BIN" Name="juego.bin"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="juego_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="juego_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="juego_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="juego_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="juego_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="juego_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="juego_timing_summary_routed.rpx"/>
+  <File Type="RDI-RDI" Name="juego.vdi"/>
+  <File Type="ROUTE-CLK" Name="juego_clock_utilization_routed.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="juego_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="juego_postroute_physopt_bb.dcp"/>
+  <File Type="BITSTR-NKY" Name="juego.nky"/>
+  <File Type="BITSTR-BMM" Name="juego_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="juego.mmi"/>
+  <File Type="BITSTR-LTX" Name="juego.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="juego.sysdef"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/display_34.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/segment_decoder_34.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/states_machine.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/vga_ctrl_640x480_60Hz.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/juego.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/debounce.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="juego"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PPRDIR/Basys3_Master.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2017"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+</GenRun>

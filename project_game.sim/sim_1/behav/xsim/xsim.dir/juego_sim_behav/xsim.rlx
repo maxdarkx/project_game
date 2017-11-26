@@ -1,0 +1,12 @@
+
+{ 
+    crc :  883050368133116978  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto 404c87273560422394f273d467c07ba7 --incr --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot juego_sim_behav xil_defaultlib.juego_sim" , 
+    buildDate : "Oct  4 2017" , 
+    buildTime : "20:11:37" , 
+    linkCmd : "C:\\xilinx\\Vivado\\2017.3\\data\\..\\tps\\mingw\\6.2.0\\win64.o\\nt\\bin\\gcc.exe -Wa,-W  -O -Wl,--stack,104857600 -o \"xsim.dir/juego_sim_behav/xsimk.exe\"   \"xsim.dir/juego_sim_behav/obj/xsim_0.win64.obj\" \"xsim.dir/juego_sim_behav/obj/xsim_1.win64.obj\" \"C:\\xilinx\\Vivado\\2017.3\\lib\\win64.o\\\\librdi_simulator_kernel.dll\" \"C:\\xilinx\\Vivado\\2017.3\\lib\\win64.o\\\\librdi_simbridge_kernel.dll\"" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 

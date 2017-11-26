@@ -38,6 +38,9 @@ Port
 (
 	clk:		in 	std_logic;
 	rst: 		in 	std_logic;
+	moneda:   	in  std_logic;
+    mult:     	in  std_logic;
+    start:    	in  std_logic;
 	hcount:		in 	std_logic_vector(10 downto 0);
 	vcount:		in 	std_logic_vector(10 downto 0);
 	value:		out std_logic_vector(7 downto 0);
@@ -48,7 +51,6 @@ Port
 end states_machine;
 
 architecture Behavioral of states_machine is
-	--constant value: std_logic:='0'; --borrar
 	constant dl:  integer := 50; 	--largo del caracter
 	constant dh:  integer := 100; 	--altura del caracter
 	constant lw:  integer := 5; 	--ancho de las lineas
@@ -63,19 +65,12 @@ architecture Behavioral of states_machine is
 
 	constant EVU : integer := 2*(dh+esh); -- espacio vertical utilizado
 	constant EHU1: integer := cc1*(dl+esh) ; --Espacio horizontal total utilizado fila 1 y 2
-	
 	constant RESET_DATA: std_logic_vector(7 downto 0):=(others=>'0');
-	constant code_F0: std_logic_vector(7 downto 0):="11110000"; --"F0"
-	constant code_E0: std_logic_vector(7 downto 0):="11100000";	--"E0"
-	constant code_R:  std_logic_vector(7 downto 0):="00101101";	--"R= 2D"
-	constant code_Enter: std_logic_vector(7 downto 0):="01011010";--"5A"
 
-	signal data11,data12,data13,data14 :std_logic_vector(7 downto 0):=RESET_DATA;
-	signal data21,data22,data23,data24 :std_logic_vector(7 downto 0):=RESET_DATA;
-	signal user_check: std_logic:='0';
-	type state_code is (s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22);
-	signal state_p,state_f: state_code:= s0;
-	signal keycode_aux: std_logic_vector(7 downto 0):=(others=>'0');
+	signal data11,data12,data13 :std_logic_vector(7 downto 0):=RESET_DATA;
+	type state_code is (s0,s1,s2,s3,s4,s5,s6,s7,s8,s9);
+	signal state_p_1,state_p_2,state_p_3,state_f_1,state_f_2,state_f_3: state_code:= s0;
+	signal clk_1hz,clk_2hz,clk_4hz: std_logic:='0';
 	constant c_max:integer:=5000000;
 begin
 
@@ -83,7 +78,9 @@ begin
 		variable px1,px10,px11,px12,px13,px101: integer:=0;
 		variable px2,px20,px21,px22,px23,px201: integer:=0;
 		variable py1,py2,py3: integer;
+	
 	begin
+
 		--centrado vertical y horizontalmente
 		px1 := (th-ehu1)/2 ;
 		py1 := (tv - EVU)/2;
@@ -99,6 +96,8 @@ begin
 		px101:= px1 + 3*(dl + esh);
 
 
+
+
 		if (vcount > py1) and (vcount <py2) then
 			posy<=py1;
 
@@ -110,7 +109,7 @@ begin
 				posx<=px11;
 				value<=data12;
 
-			elsif hcount>px12 and hcount<px1101 then
+			elsif hcount>px12 and hcount<px101 then
 				posx<=px12;
 				value<=data13;
 			--elsif hcount>px13 and hcount<px101 then
@@ -120,6 +119,8 @@ begin
 			--	posx<=px14;
 			--	value<=data_icon1;
 			end if;
+
+
 
 		--elsif vcount > py2 and vcount <py3 then
 		--	posy<=py2;
@@ -140,11 +141,246 @@ begin
 		--	--	posx<=px14;
 		--	--	value<=data_icon2;
 			end if;
-		end if;
 	end process;
 
+
+--___________________________________________________________________
+--Relojes para las maquinas. Recordar que clk= 10Mhz
+--___________________________________________________________________
+
+clk1hz:process(clk)
+variable counter:integer:=0;
+begin
+	if (clk'event and clk = '1') then
+		counter:=counter+1;
+	end if;
+	if(counter=100000000) then
+		counter:=0;
+		clk_1hz<=not clk_1hz;
+	end if;
+end process;
+
+clk2hz:process(clk)
+variable counter:integer:=0;
+begin
+	if (clk'event and clk = '1') then
+		counter:=counter+1;
+	end if;
+	if(counter=50000000) then
+		counter:=0;
+		clk_2hz<=not clk_2hz;
+	end if;
+end process;
+
+clk4hz:process(clk)
+variable counter:integer:=0;
+begin
+	if (clk'event and clk = '1') then
+		counter:=counter+1;
+	end if;
+	if(counter=25000000) then
+		counter:=0;
+		clk_4hz<=not clk_4hz;
+	end if;
+end process;
+
+
+
+
+
+
+
+
+
+--______________________________________________________________________
+
+--la main machine se encargara de en que estado estara cada una de las demas
+--tambien recibira las señales de inicio, fin (start='0', start='1'), reset, multiplicador y moneda
+
+Main_machine: process(clk_1hz,clk_2hz,clk_4hz,rst,moneda,start,mult)
+variable move:std_logic:='0';
+
+
+begin
+
+if rst='1' then
+	state_p_1<=s0;
+	state_p_2<=s0;
+	state_p_3<=s0;
+end if;
+
+if start='1' then
+	move:= not move;
+end if;
+
+
+
+
+
+--maquina 1
+if(clk_1hz'event and clk_1hz='1') then
+	if move = '1' then
+		state_p_1<=state_f_1;
+	end if;
+end if;
+if(clk_2hz'event and clk_2hz='1') then
+	if move='1' then
+		state_p_2<=state_f_2;
+	end if;
+end if;
+
+if(clk_4hz'event and clk_4hz='1') then
+	if move= '1' then
+		state_p_3<=state_f_3;
+	end if;
+end if;
+
+
+
+
+end process;
+
+first_machine: process(state_p_1)	
+begin
+
+	case state_p_1 is
+		when s0=>
+			data11<="01000101";
+			state_f_1<=s1;
+		when s1=>
+			data11<="00010110";
+			state_f_1<=s2;
+		when s2=>
+			data11<="00011110";
+			state_f_1<=s3;
+		when s3=>
+			data11<="00100110";
+			state_f_1<=s4;
+		when s4=>
+			data11<="00100101";
+			state_f_1<=s5;
+		when s5=>
+			data11<="00101110";
+			state_f_1<=s6;
+		when s6=>
+			data11<="00110110";
+			state_f_1<=s7;
+		when s7=>
+			data11<="00111101";
+			state_f_1<=s8;
+		when s8=>
+			data11<="00111110";
+			state_f_1<=s9;
+		when s9=>
+			data11<="01000110";
+			state_f_1<=s0;
+	end case;
+
+end process;
+
+second_machine: process(state_p_2)
+begin
+		case state_p_2 is
+		when s0=>
+			data12<="01000101";
+			state_f_2<=s1;
+		when s1=>
+			data12<="00010110";
+			state_f_2<=s2;
+		when s2=>
+			data12<="00011110";
+			state_f_2<=s3;
+		when s3=>
+			data12<="00100110";
+			state_f_2<=s4;
+		when s4=>
+			data12<="00100101";
+			state_f_2<=s5;
+		when s5=>
+			data12<="00101110";
+			state_f_2<=s6;
+		when s6=>
+			data12<="00110110";
+			state_f_2<=s7;
+		when s7=>
+			data12<="00111101";
+			state_f_2<=s8;
+		when s8=>
+			data12<="00111110";
+			state_f_2<=s9;
+		when s9=>
+			data12<="01000110";
+			state_f_2<=s0;
+	end case;
+end process;
+
+third_machine: process(state_p_3)
+begin
+		case state_p_3 is
+		when s0=>
+			data13<="01000101";
+			state_f_3<=s1;
+		when s1=>
+			data13<="00010110";
+			state_f_3<=s2;
+		when s2=>
+			data13<="00011110";
+			state_f_3<=s3;
+		when s3=>
+			data13<="00100110";
+			state_f_3<=s4;
+		when s4=>
+			data13<="00100101";
+			state_f_3<=s5;
+		when s5=>
+			data13<="00101110";
+			state_f_3<=s6;
+		when s6=>
+			data13<="00110110";
+			state_f_3<=s7;
+		when s7=>
+			data13<="00111101";
+			state_f_3<=s8;
+		when s8=>
+			data13<="00111110";
+			state_f_3<=s9;
+		when s9=>
+			data13<="01000110";
+			state_f_3<=s0;
+	end case;
+end process;
+--comparador de puntos en los leds
+comparar:process(start)
+begin
+if start = '1' then
+    if (data11=data12 and data12=data13)   then
+           
+           	with data13 select
+            led <=	"00000001"	when	"01000101",
+                    "00000010"	when	"00010110",
+                    "00000011"	when	"00011110",
+                    "00000100"	when	"00100110",
+                    "00000101"	when 	"00100101",
+                    "00000110"	when	"00101110",
+                    "00000111"	when	"00110110",
+                    "00001000"	when	"00111101",
+                    "00001001"	when	"00111110",
+                    "00001010"	when	"01000110",
+                    "11111111"	when	others;		
+    else
+            led <= "00000000";
+	end if;
+end if;
+end process;
+
+
+     
+   
 		
 end Behavioral;
+
+
+
 
 
 
@@ -173,6 +409,7 @@ end Behavioral;
 	--begin
 	--		--state_f<=state_p;
 			
+
 	--			case state_p is
 	--				when s0=>
 	--						state_f<=s1;

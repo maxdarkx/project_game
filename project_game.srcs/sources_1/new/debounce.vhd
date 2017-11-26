@@ -10,15 +10,15 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 library UNISIM;
 use UNISIM.VComponents.all;
 
-entity debouncing is
+entity debounce is
   generic( COUNT_MAX: integer := 255; 
            COUNT_WIDTH: integer := 8);
  port( clk : in std_logic;
        I :in std_logic;
        O : out std_logic);
-end debouncing;
+end debounce;
 
-architecture behave of debouncing is
+architecture behave of debounce is
 
 signal count: std_logic_vector(COUNT_WIDTH-1 downto 0);
 signal Iv: std_logic := '0';
